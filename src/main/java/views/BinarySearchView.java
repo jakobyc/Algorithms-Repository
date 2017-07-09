@@ -1,48 +1,57 @@
 package main.java.views;
 
-import main.java.algorithms.IAlgorithm;
-import main.java.algorithms.LinearSearch;
-import main.java.gui.forms.GUIMain;
-import main.java.models.viewmodels.ViewModel;
-
 import java.awt.Color;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
-// TODO: Add abstract class called SearchView since LinearSearch and BinarySearch share duplicate code.
-public class LinearSearchView implements IView
+import main.java.algorithms.BinarySearch;
+import main.java.algorithms.IAlgorithm;
+import main.java.gui.forms.GUIMain;
+import main.java.models.viewmodels.ViewModel;
+
+public class BinarySearchView implements IView
 {
-	// View model updated by controller:
 	private ViewModel.Algorithm.Search viewModel;
 	
 	private GUIMain gui;
 	
-	public LinearSearchView(GUIMain gui)
+	public BinarySearchView(GUIMain gui)
 	{
 		this.gui = gui;
-		gui.setTitle("Linear Search");
+		gui.setTitle("Binary Search");
 		
 		hideComponents();
 	}
 	
-	public void hideComponents()
+	public GUIMain getGUI() 
 	{
-		gui.userButtons[2].setVisible(false);
+		return this.gui;
 	}
 	
-	public String getAnswer()
+	public IAlgorithm getAlgorithm(double answer)
+	{
+		return new BinarySearch(answer);
+	}
+
+	public String getAnswer() 
 	{
 		String answer = JOptionPane.showInputDialog(gui.getFrame(), "Enter an answer for the algorithm to find.", "<Whole number between 0 and 100>", JOptionPane.INFORMATION_MESSAGE);
 		return answer;
 	}
-	
-	public void displayError()
+
+	public void displayError() 
 	{
 		JOptionPane.showMessageDialog(gui.getFrame(), viewModel.Error, "Error", JOptionPane.ERROR_MESSAGE);
 	}
+
+	public void hideComponents() 
+	{
+		//TODO: Not implemented
+	}
 	
-	public void updateGUI()
+	public void updateGUI() 
 	{
 		gui.resetRangeButtons();
 		
@@ -59,8 +68,8 @@ public class LinearSearchView implements IView
 			}
 		}
 	}
-	
-	public void update(Object o)
+
+	public void update(Object o) 
 	{
 		this.viewModel = (ViewModel.Algorithm.Search)o;
 		if (viewModel.Error == null)
@@ -69,8 +78,8 @@ public class LinearSearchView implements IView
 			showData();
 		}
 	}
-	
-	public void addActionListener(ActionListener listener)
+
+	public void addActionListener(ActionListener listener) 
 	{
 		for (JButton button : gui.userButtons)
 		{
@@ -79,8 +88,8 @@ public class LinearSearchView implements IView
 		
 		gui.algList.addActionListener(listener);
 	}
-	
-	public void removeActionListeners()
+
+	public void removeActionListeners() 
 	{
 		for (JButton button : gui.userButtons)
 		{
@@ -90,19 +99,9 @@ public class LinearSearchView implements IView
 			}
 		}
 	}
-	
-	public GUIMain getGUI()
-	{
-		return this.gui;
-	}
-	
-	public IAlgorithm getAlgorithm(double answer)
-	{
-		return new LinearSearch(answer);
-	}
-	
+
 	private void showData()
-	{	
+	{
 		String output = String.format("Answer is: %1s \nAttempts taken: %2s", viewModel.Answer, viewModel.Attempts);
 		gui.myTextArea.setText(output);
 		System.out.println(output);

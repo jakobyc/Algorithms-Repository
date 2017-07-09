@@ -3,12 +3,14 @@ package main.java.algorithms;
 import java.util.List;
 import java.util.ArrayList;
 
-public class LinearSearch implements Algorithm, Search
+public class LinearSearch implements ISearch
 {
-	private int attempts;
+	private int target,
+				attempts;
 	
-	private double answer, 
-				   target;
+	private double answer;
+	
+	private List<Integer> guessData;
 	
 	public LinearSearch(double answer) 
 	{
@@ -19,7 +21,7 @@ public class LinearSearch implements Algorithm, Search
 	{
 		reset();
 		
-		List<Double> guessData = new ArrayList<Double>();
+		guessData = new ArrayList<Integer>();
 		
 		while (true)
 		{
@@ -49,7 +51,7 @@ public class LinearSearch implements Algorithm, Search
 		return this.answer;
 	}
 	
-	public double getTarget()
+	public int getTarget()
 	{
 		return this.target;
 	}
@@ -59,13 +61,18 @@ public class LinearSearch implements Algorithm, Search
 		return this.attempts;
 	}
 	
+	public List<Integer> getGuessData()
+	{
+		return this.guessData;
+	}
+	
 	// Mutators:
 	public void setAnswer(double answer)
 	{
 		this.answer = answer;
 	}
 	
-	public void setTarget(double target)
+	public void setTarget(int target)
 	{
 		this.target = target;
 	}

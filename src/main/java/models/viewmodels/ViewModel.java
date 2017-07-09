@@ -1,5 +1,7 @@
 package main.java.models.viewmodels;
 
+import java.util.List;
+
 // View Models for filtering client's access to model data:
 public class ViewModel 
 {
@@ -10,6 +12,7 @@ public class ViewModel
 			public double Answer,
 						  Target;
 			public int Attempts;
+			public List<Integer> GuessData;
 			public String Error;
 		}
 		

@@ -1,21 +1,21 @@
 package main.java.models;
 
-import main.java.algorithms.Algorithm;
-import main.java.algorithms.Search;
+import main.java.algorithms.IAlgorithm;
+import main.java.algorithms.ISearch;
 
 public class AlgorithmModel 
 {
 	public double Answer,
 			      Target;
 	
-	public void calculate(Algorithm algorithm)
+	public void calculate(IAlgorithm algorithm)
 	{
 		algorithm.calculate();
 	}
 	
-	public void setAnswer(Algorithm algorithm, double answer)
+	public void setAnswer(IAlgorithm algorithm, double answer)
 	{
-		Search searchAlgorithm = (Search)algorithm;
+		ISearch searchAlgorithm = (ISearch)algorithm;
 		searchAlgorithm.setAnswer(answer);
 	}
 }

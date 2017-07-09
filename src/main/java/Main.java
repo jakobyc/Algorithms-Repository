@@ -11,8 +11,9 @@ public class Main
 		GUIMain gui = new GUIMain();
 		gui.Initialize();
 		
-		AlgorithmController controller = new AlgorithmController();
 		// Initial View:
-		View view  = controller.linearSearch(gui);
+		IView view  = new LinearSearchView(gui);
+				
+		AlgorithmController controller = new AlgorithmController(view);
 	}
 }

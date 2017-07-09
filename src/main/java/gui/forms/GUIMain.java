@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class GUIMain
 {
-	private static String[] algorithmList = {"Linear Search", "Binary Search", "Selection Sort"};
+	private String[] algorithmList = {"Linear Search", "Binary Search", "Selection Sort"};
 	
 	// GUI components (all static to be used in the static GUI() method):
 	protected JFrame myFrame;
@@ -17,7 +17,7 @@ public class GUIMain
 	public JButton[] userButtons;
 	public JTextArea myTextArea;	
 	// Drop-down menu for the algorithms:
-	protected JComboBox<String> algList;
+	public JComboBox<String> algList;
 	// Shows guesses on the GUI when checked:
 	public JCheckBox guessCheck;
 	
@@ -95,7 +95,7 @@ public class GUIMain
 			{
 				case(0):
 				{
-					buttons[i].setText("Reset");
+					buttons[i].setText("Random");
 					break;
 				}
 				case(1):
@@ -112,16 +112,6 @@ public class GUIMain
 		}
 	}
 	
-	private void configureFrame(JFrame frame)
-	{
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle(algorithmList[0]);
-		frame.setSize(1500,  450);
-		// Null parameter = center screen:
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	}
-	
 	public void configureTextArea(JTextArea area)
 	{
 		area.setPreferredSize(new Dimension(150, 250));
@@ -129,6 +119,35 @@ public class GUIMain
 		area.setEditable(false);
 	}
 	
+	
+	public void resetRangeButtons()
+	{
+		for (JToggleButton button: rangeButtons)
+		{
+			button.setSelected(true);
+			button.setBackground(null);
+		}
+	}
+	
+	public JFrame getFrame()
+	{
+		return this.myFrame;
+	}
+	
+	public void setTitle(String title)
+	{
+		myFrame.setTitle(title);
+	}
+	
+	private void configureFrame(JFrame frame)
+	{
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(1500,  450);
+		// Null parameter = center screen:
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	}
+
 	/**
 	*  Add constraints to global GridBagConstraints variable to format panels.
 	*/
@@ -152,19 +171,5 @@ public class GUIMain
 		c.ipady = ipady;
 		c.gridx = gridx;
 		c.gridy = gridy;
-	}
-	
-	public void resetRangeButtons()
-	{
-		for (JToggleButton button: rangeButtons)
-		{
-			button.setSelected(true);
-			button.setBackground(null);
-		}
-	}
-	
-	public JFrame getFrame()
-	{
-		return this.myFrame;
 	}
 }
