@@ -1,6 +1,6 @@
 package main.java.algorithms;
 
-public interface ISort 
+public interface ISort extends IAlgorithm
 {
 
 }

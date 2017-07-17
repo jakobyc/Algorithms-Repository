@@ -1,9 +1,13 @@
 package main.java.algorithms;
 
 import java.util.List;
+
+import main.java.algorithms.results.ISearchResults;
+import main.java.algorithms.results.SearchResults;
+
 import java.util.ArrayList;
 
-public class LinearSearch implements ISearch
+public class LinearSearch implements IAlgorithm, ISearch
 {
 	private int target,
 				attempts;
@@ -43,6 +47,11 @@ public class LinearSearch implements ISearch
 	{
 		this.attempts = 0;
 		this.target = 0;
+	}
+	
+	public ISearchResults getResults()
+	{
+		return new SearchResults(target, attempts, answer, guessData);
 	}
 	
 	// Accessors:

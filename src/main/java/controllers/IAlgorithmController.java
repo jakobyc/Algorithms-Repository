@@ -1,7 +1,12 @@
 package main.java.controllers;
 
+import java.awt.event.ActionListener;
+
+import main.java.algorithms.IAlgorithm;
+
 public interface IAlgorithmController extends IController
 {
-	void random();
-	void setAnswer();
+	IAlgorithm getAlgorithm();
+	
+	void addActionListener(ActionListener listener);
 }

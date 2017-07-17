@@ -1,15 +1,10 @@
 package main.java.algorithms;
 
-import java.util.List;
+import main.java.algorithms.results.ISearchResults;
 
 public interface ISearch extends IAlgorithm
 {
-	int getAttempts();
-	int getTarget();
-	
-	double getAnswer();
-
-	List<Integer> getGuessData();
+	ISearchResults getResults();
 	
 	void setAnswer(double answer);
 	void setTarget(int target);

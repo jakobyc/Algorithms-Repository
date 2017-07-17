@@ -3,11 +3,11 @@ package main.java.views;
 import java.awt.event.ActionListener;
 
 import main.java.algorithms.IAlgorithm;
-import main.java.gui.forms.GUIMain;
+import main.java.gui.forms.SearchForm;;
 
 public interface IView 
 {
-	GUIMain getGUI();
+	SearchForm getGUI();
 	IAlgorithm getAlgorithm(double answer);
 	
 	String getAnswer();

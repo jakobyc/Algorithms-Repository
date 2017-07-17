@@ -2,7 +2,7 @@ package main.java.views;
 
 import main.java.algorithms.IAlgorithm;
 import main.java.algorithms.LinearSearch;
-import main.java.gui.forms.GUIMain;
+import main.java.gui.forms.SearchForm;
 import main.java.models.viewmodels.ViewModel;
 
 import java.awt.Color;
@@ -16,11 +16,12 @@ public class LinearSearchView implements IView
 	// View model updated by controller:
 	private ViewModel.Algorithm.Search viewModel;
 	
-	private GUIMain gui;
+	private SearchForm gui;
 	
-	public LinearSearchView(GUIMain gui)
+	public LinearSearchView()
 	{
-		this.gui = gui;
+		this.gui = new SearchForm();
+		gui.Initialize();
 		gui.setTitle("Linear Search");
 		
 		hideComponents();
@@ -91,7 +92,7 @@ public class LinearSearchView implements IView
 		}
 	}
 	
-	public GUIMain getGUI()
+	public SearchForm getGUI()
 	{
 		return this.gui;
 	}

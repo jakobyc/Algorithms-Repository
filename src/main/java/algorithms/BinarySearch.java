@@ -3,7 +3,10 @@ package main.java.algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BinarySearch implements ISearch
+import main.java.algorithms.results.ISearchResults;
+import main.java.algorithms.results.SearchResults;
+
+public class BinarySearch implements IAlgorithm, ISearch
 {
 	private double answer;
 	
@@ -57,26 +60,11 @@ public class BinarySearch implements ISearch
 	}
 
 	// Accessors:
-	public int getAttempts() 
+	public ISearchResults getResults() 
 	{
-		return this.attempts;
+		return new SearchResults(target, attempts, answer, guessData);
 	}
-
-	public double getAnswer() 
-	{
-		return this.answer;
-	}
-
-	public int getTarget() 
-	{
-		return this.target;
-	}
-
-	public List<Integer> getGuessData() 
-	{
-		return this.guessData;
-	}
-
+	
 	// Mutators:
 	public void setAnswer(double answer) 
 	{
@@ -87,5 +75,4 @@ public class BinarySearch implements ISearch
 	{
 		this.target = target;
 	}
-
 }
