@@ -18,7 +18,18 @@ public abstract class MainForm
 		// Null parameter = center screen:
 		myFrame.setLocationRelativeTo(null);
 		myFrame.setVisible(true);
+		myFrame.add(mainPanel);
 		resetGUI();
+	}
+	
+	public JFrame getFrame()
+	{
+		return myFrame;
+	}
+	
+	public void setTitle(String title)
+	{
+		myFrame.setTitle(title);
 	}
 	
 	// Invoked when changing views to reset the main panel for the next view:

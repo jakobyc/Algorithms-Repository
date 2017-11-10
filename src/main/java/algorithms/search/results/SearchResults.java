@@ -1,8 +1,9 @@
-package main.java.algorithms.results;
+package main.java.algorithms.search.results;
 
 import java.util.List;
 
-public class SearchResults implements ISearchResults {
+public class SearchResults implements ISearchResults 
+{
 	private int target, attempts;
 
 	private double answer;

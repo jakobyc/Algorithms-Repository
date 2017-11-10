@@ -40,7 +40,6 @@ public class SearchForm extends MainForm
 	{
 		// Set/change constraints for the above GridBagConstraints and apply 
 		// constraints to panels:
-		myFrame.add(mainPanel);
 		setConstraints("Horizontal", 0, 1, 0, 100, 0, 0);
 		mainPanel.add(panel01, c);
 		setConstraints("None", 0.5, 0.5, 450, 0, 0, 1);
@@ -124,14 +123,9 @@ public class SearchForm extends MainForm
 		}
 	}
 	
-	public JFrame getFrame()
+	public void setSelectedAlgorithm(String option)
 	{
-		return this.myFrame;
-	}
-	
-	public void setTitle(String title)
-	{
-		myFrame.setTitle(title);
+		algList.setSelectedItem(option);
 	}
 
 	/**

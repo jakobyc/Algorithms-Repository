@@ -1,13 +1,14 @@
-package main.java.algorithms;
+package main.java.algorithms.search;
 
 import java.util.List;
 
-import main.java.algorithms.results.ISearchResults;
-import main.java.algorithms.results.SearchResults;
+import main.java.algorithms.IAlgorithm;
+import main.java.algorithms.search.results.*;
+import main.java.algorithms.search.params.*;
 
 import java.util.ArrayList;
 
-public class LinearSearch implements IAlgorithm, ISearch
+public class LinearSearch implements IAlgorithm<SearchResults, SearchParams>
 {
 	private int target,
 				attempts;
@@ -21,7 +22,31 @@ public class LinearSearch implements IAlgorithm, ISearch
 		this.answer = answer;
 	}
 	
-	public void calculate() 
+	public SearchResults execute(SearchParams parameters) 
+	{
+		reset();
+				
+		guessData = new ArrayList<Integer>();
+		
+		while (true)
+		{
+			attempts += 1;
+			
+			if (answer > target)
+			{
+				guessData.add(target);
+				target += 1;
+			}
+			else if (answer == target)
+			{
+				break;
+			}
+		}
+		
+		return getResults();
+	}
+	
+	/*public void calculate() 
 	{
 		reset();
 		
@@ -41,7 +66,7 @@ public class LinearSearch implements IAlgorithm, ISearch
 				break;
 			}
 		}
-	}
+	}*/
 
 	public void reset() 
 	{
@@ -49,7 +74,7 @@ public class LinearSearch implements IAlgorithm, ISearch
 		this.target = 0;
 	}
 	
-	public ISearchResults getResults()
+	public SearchResults getResults()
 	{
 		return new SearchResults(target, attempts, answer, guessData);
 	}

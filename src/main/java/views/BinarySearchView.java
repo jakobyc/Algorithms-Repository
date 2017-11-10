@@ -6,8 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import main.java.algorithms.BinarySearch;
 import main.java.algorithms.IAlgorithm;
+import main.java.algorithms.search.BinarySearch;
+import main.java.algorithms.search.params.SearchParams;
+import main.java.algorithms.search.results.SearchResults;
 import main.java.gui.forms.SearchForm;
 import main.java.models.viewmodels.ViewModel;
 
@@ -22,6 +24,7 @@ public class BinarySearchView implements IView
 		this.gui = new SearchForm();
 		gui.Initialize();
 		gui.setTitle("Binary Search");
+		gui.setSelectedAlgorithm("Binary Search");
 		
 		hideComponents();
 	}
@@ -31,7 +34,7 @@ public class BinarySearchView implements IView
 		return this.gui;
 	}
 	
-	public IAlgorithm getAlgorithm(double answer)
+	public IAlgorithm<SearchResults, SearchParams> getAlgorithm(double answer)
 	{
 		return new BinarySearch(answer);
 	}

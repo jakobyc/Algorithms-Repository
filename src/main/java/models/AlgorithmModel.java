@@ -1,8 +1,5 @@
 package main.java.models;
 
-import main.java.algorithms.IAlgorithm;
-import main.java.algorithms.ISearch;
-
 public class AlgorithmModel 
 {
 	/*public double Answer,

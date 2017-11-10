@@ -1,12 +1,13 @@
-package main.java.algorithms;
+package main.java.algorithms.search;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.algorithms.results.ISearchResults;
-import main.java.algorithms.results.SearchResults;
+import main.java.algorithms.IAlgorithm;
+import main.java.algorithms.search.results.*;
+import main.java.algorithms.search.params.*;
 
-public class BinarySearch implements IAlgorithm, ISearch
+public class BinarySearch implements IAlgorithm<SearchResults, SearchParams>
 {
 	private double answer;
 	
@@ -22,8 +23,8 @@ public class BinarySearch implements IAlgorithm, ISearch
 		this.answer = answer;
 	}
 	
-	public void calculate() 
-	{	
+	public SearchResults execute(SearchParams parameters) 
+	{
 		reset();
 		
 		guessData = new ArrayList<Integer>();
@@ -49,6 +50,8 @@ public class BinarySearch implements IAlgorithm, ISearch
 			
 			target = ((min + max) / 2);
 		}
+		
+		return getResults();
 	}
 
 	public void reset() 
@@ -60,7 +63,7 @@ public class BinarySearch implements IAlgorithm, ISearch
 	}
 
 	// Accessors:
-	public ISearchResults getResults() 
+	public SearchResults getResults() 
 	{
 		return new SearchResults(target, attempts, answer, guessData);
 	}

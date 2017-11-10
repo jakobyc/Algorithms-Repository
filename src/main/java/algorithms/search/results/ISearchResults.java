@@ -1,8 +1,9 @@
-package main.java.algorithms.results;
+package main.java.algorithms.search.results;
 
 import java.util.List;
 
-public interface ISearchResults extends IAlgorithmResults {
+public interface ISearchResults 
+{
 	int getTarget();
 
 	int getAttempts();

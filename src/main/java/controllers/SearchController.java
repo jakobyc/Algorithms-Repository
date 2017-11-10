@@ -3,7 +3,8 @@ package main.java.controllers;
 import java.awt.event.ActionListener;
 
 import main.java.algorithms.IAlgorithm;
-import main.java.algorithms.results.ISearchResults;
+import main.java.algorithms.search.results.*;
+import main.java.algorithms.search.params.*;
 import main.java.gui.listeners.SearchListener;
 import main.java.models.SearchModel;
 import main.java.models.viewmodels.ViewModel;
@@ -15,7 +16,7 @@ public class SearchController implements IAlgorithmController, ISearchController
 {
 	private SearchModel model;
 	private IView view;
-	private IAlgorithm algorithm;
+	private IAlgorithm<SearchResults, SearchParams> algorithm;
 	
 	public SearchController(IView view)
 	{
@@ -27,14 +28,25 @@ public class SearchController implements IAlgorithmController, ISearchController
 	
 	public void random()
 	{
+		ViewModel.Algorithm.Search viewModel = new ViewModel.Algorithm.Search();
+		
 		double answer = Math.ceil(Math.random() * 100);
 		
 		this.algorithm = view.getAlgorithm(answer);
-		calculateSearch(answer);
+		SearchResults results = this.algorithm.execute(new SearchParams(answer));
+		
+		viewModel.Answer = results.getAnswer();
+		viewModel.Target = results.getTarget();
+		viewModel.Attempts = results.getAttempts();
+		viewModel.GuessData = results.getGuessData();
+		view.update(viewModel);
+		//calculateSearch(answer);
 	}
 	
 	public void setAnswer()
 	{
+		ViewModel.Algorithm.Search viewModel = new ViewModel.Algorithm.Search();
+
 		String answer = view.getAnswer();
 		int maxValue = view.getGUI().rangeButtons.length - 1;
 
@@ -45,7 +57,14 @@ public class SearchController implements IAlgorithmController, ISearchController
 			if (parsedAnswer >= 0 && parsedAnswer <= maxValue)
 			{	
 				this.algorithm = view.getAlgorithm(parsedAnswer);
-				calculateSearch(parsedAnswer);
+				//calculateSearch(parsedAnswer);
+				SearchResults results = this.algorithm.execute(new SearchParams(parsedAnswer));
+				
+				viewModel.Answer = results.getAnswer();
+				viewModel.Target = results.getTarget();
+				viewModel.Attempts = results.getAttempts();
+				viewModel.GuessData = results.getGuessData();
+				view.update(viewModel);
 			}
 			else
 			{
@@ -54,7 +73,6 @@ public class SearchController implements IAlgorithmController, ISearchController
 		}
 		catch (Exception e)
 		{
-			ViewModel.Algorithm.Search viewModel = new ViewModel.Algorithm.Search();
 			viewModel.Error = "Input was not a number between 0 and " + maxValue;
 			view.update(viewModel);
 			view.displayError();
@@ -66,7 +84,7 @@ public class SearchController implements IAlgorithmController, ISearchController
 		view.addActionListener(listener);
 	}
 	
-	public IAlgorithm getAlgorithm()
+	public IAlgorithm<SearchResults, SearchParams> getAlgorithm()
 	{
 		return this.algorithm;
 	}
@@ -78,13 +96,12 @@ public class SearchController implements IAlgorithmController, ISearchController
 	
 	public void changeView(ViewType type)
 	{
-		// TODO: Binary search hard-coded until I decide how I want to change views:
 		view.removeActionListeners();
 		this.view = ViewFactory.GetView(type);
 		view.addActionListener(new SearchListener(view, this));
 	}
 	
-	private void calculateSearch(double answer)
+	/*private void calculateSearch(double answer)
 	{
 		ViewModel.Algorithm.Search viewModel = new ViewModel.Algorithm.Search();
 		
@@ -102,5 +119,5 @@ public class SearchController implements IAlgorithmController, ISearchController
 			viewModel.Error = null;
 			view.update(viewModel);	
 		}
-	}
+	}*/
 }

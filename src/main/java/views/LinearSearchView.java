@@ -1,7 +1,9 @@
 package main.java.views;
 
 import main.java.algorithms.IAlgorithm;
-import main.java.algorithms.LinearSearch;
+import main.java.algorithms.search.LinearSearch;
+import main.java.algorithms.search.params.SearchParams;
+import main.java.algorithms.search.results.SearchResults;
 import main.java.gui.forms.SearchForm;
 import main.java.models.viewmodels.ViewModel;
 
@@ -23,6 +25,7 @@ public class LinearSearchView implements IView
 		this.gui = new SearchForm();
 		gui.Initialize();
 		gui.setTitle("Linear Search");
+		gui.setSelectedAlgorithm("Linear Search");
 		
 		hideComponents();
 	}
@@ -97,7 +100,7 @@ public class LinearSearchView implements IView
 		return this.gui;
 	}
 	
-	public IAlgorithm getAlgorithm(double answer)
+	public IAlgorithm<SearchResults, SearchParams> getAlgorithm(double answer)
 	{
 		return new LinearSearch(answer);
 	}

@@ -1,7 +1,6 @@
 package main.java;
 
-import main.java.controllers.IAlgorithmController;
-import main.java.controllers.SearchController;
+import main.java.controllers.*;
 import main.java.views.*;
 
 public class Main 
@@ -11,6 +10,6 @@ public class Main
 		// Initial View:
 		IView view  = new LinearSearchView();
 				
-		IAlgorithmController controller = new SearchController(view);
+		ISearchController controller = new SearchController(view);
 	}
 }

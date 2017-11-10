@@ -1,13 +1,7 @@
 package main.java.algorithms;
 
-import main.java.algorithms.results.IAlgorithmResults;
-
 // Strategy for the Strategy pattern:
-public interface IAlgorithm
+public interface IAlgorithm<Results, Params>
 {
-	// Performs mathematical computations for each implemented algorithm:
-	void calculate();
-	void reset();
-	
-	IAlgorithmResults getResults();
+	Results execute(Params parameters);
 }

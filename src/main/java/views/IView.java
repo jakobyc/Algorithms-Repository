@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 import main.java.algorithms.IAlgorithm;
 import main.java.gui.forms.SearchForm;;
 
-public interface IView 
+public interface IView
 {
 	SearchForm getGUI();
-	IAlgorithm getAlgorithm(double answer);
+	<Results, Params> IAlgorithm<Results, Params> getAlgorithm(double answer);
 	
 	String getAnswer();
 

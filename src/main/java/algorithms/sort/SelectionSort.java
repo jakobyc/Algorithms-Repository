@@ -1,8 +1,10 @@
-package main.java.algorithms;
+package main.java.algorithms.sort;
 
 import java.util.List;
 
-import main.java.algorithms.results.IAlgorithmResults;
+import main.java.algorithms.IAlgorithm;
+import main.java.algorithms.sort.params.*;
+import main.java.algorithms.sort.results.*;
 
 // Selection sort algorithm:
 /* Pseudocode:
@@ -12,7 +14,7 @@ import main.java.algorithms.results.IAlgorithmResults;
  * 4. Repeat process until entire range of numbers is sorted selectively. 
  */
 
-public class SelectionSort implements IAlgorithm, ISort
+public class SelectionSort implements IAlgorithm<SortResults, SortParams>
 {
 	// Index with the smallest value and it's associated value:
 	private int minIndex, minValue;
@@ -22,6 +24,19 @@ public class SelectionSort implements IAlgorithm, ISort
 	public SelectionSort(List<Integer> data)	
 	{ 
 		this.data = data;
+	}
+	
+	public SortResults execute(SortParams parameters) 
+	{
+		int min;
+		
+		for (int i = 0; i < data.size(); i++)
+		{
+			min = findMinimumIndex(i);
+			swap(i, min);
+		}
+		
+		return new SortResults();
 	}
 	
 	public void calculate()
@@ -64,10 +79,5 @@ public class SelectionSort implements IAlgorithm, ISort
 		
 		data.set(firstIndex, data.get(secondIndex));
 		data.set(secondIndex, temp);
-	}
-
-	public IAlgorithmResults getResults() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
