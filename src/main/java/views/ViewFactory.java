@@ -13,19 +13,6 @@ public class ViewFactory
 		baseView = new BaseForm("Algorithms Repository");
 	}
 	
-	public static IView GetView(ViewType type)
-	{
-		switch(type)
-		{
-		case LINEAR_SEARCH:
-			return new LinearSearchView();
-		case BINARY_SEARCH:
-			return new BinarySearchView();
-	    default:
-	    	return null;
-		}
-	}
-	
 	public static ISearchView GetSearchView(ViewType type)
 	{
 		switch(type)
