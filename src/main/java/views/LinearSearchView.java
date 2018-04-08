@@ -102,7 +102,8 @@ public class LinearSearchView implements IView
 	
 	public IAlgorithm<SearchResults, SearchParams> getAlgorithm(double answer)
 	{
-		return new LinearSearch(answer);
+		return null;
+		//return new LinearSearch(answer);
 	}
 	
 	private void showData()

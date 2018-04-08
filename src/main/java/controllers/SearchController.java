@@ -12,7 +12,7 @@ import main.java.views.IView;
 import main.java.views.ViewFactory;
 import main.java.views.ViewFactory.ViewType;
 
-public class SearchController implements IAlgorithmController, ISearchController
+public class SearchController implements ISearchController
 {
 	private SearchModel model;
 	private IView view;
@@ -28,7 +28,7 @@ public class SearchController implements IAlgorithmController, ISearchController
 	
 	public void random()
 	{
-		ViewModel.Algorithm.Search viewModel = new ViewModel.Algorithm.Search();
+		/*ViewModel.Algorithm.Search viewModel = new ViewModel.Algorithm.Search();
 		
 		double answer = Math.ceil(Math.random() * 100);
 		
@@ -40,12 +40,12 @@ public class SearchController implements IAlgorithmController, ISearchController
 		viewModel.Attempts = results.getAttempts();
 		viewModel.GuessData = results.getGuessData();
 		view.update(viewModel);
-		//calculateSearch(answer);
+		//calculateSearch(answer);*/
 	}
 	
 	public void setAnswer()
 	{
-		ViewModel.Algorithm.Search viewModel = new ViewModel.Algorithm.Search();
+		/*ViewModel.Algorithm.Search viewModel = new ViewModel.Algorithm.Search();
 
 		String answer = view.getAnswer();
 		int maxValue = view.getGUI().rangeButtons.length - 1;
@@ -76,7 +76,7 @@ public class SearchController implements IAlgorithmController, ISearchController
 			viewModel.Error = "Input was not a number between 0 and " + maxValue;
 			view.update(viewModel);
 			view.displayError();
-		}
+		}*/
 	}
 	
 	public void addActionListener(ActionListener listener)

@@ -4,11 +4,9 @@ import java.util.List;
 
 public interface ISearchResults 
 {
-	int getTarget();
-
 	int getAttempts();
 
-	double getAnswer();
+	int getAnswer();
 
 	List<Integer> getGuessData();
 }

@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 public abstract class MainForm 
 {
 	// Same frame and main panel are re-used for every view:
-	protected static JFrame myFrame = new JFrame();
+	private static JFrame myFrame = new JFrame();
 	protected static JPanel mainPanel = new JPanel(new GridBagLayout());
 	
 	public MainForm()

@@ -1,17 +1,13 @@
 package main.java.models;
 
-import main.java.algorithms.IAlgorithm;
+import main.java.algorithms.*;
+import main.java.algorithms.search.params.SearchParams;
+import main.java.algorithms.search.results.SearchResults;
+
 public class SearchModel 
-{
-	public double Answer, Target;
-
-	public void calculate(IAlgorithm algorithm)
+{	
+	public SearchResults getResults(IAlgorithm<SearchResults, SearchParams> algorithm, int answer)
 	{
-		
-	}
-	
-	public void setAnswer(IAlgorithm algorithm, double answer)
-	{
-
+		return algorithm.execute(new SearchParams(answer));
 	}
 }

@@ -2,9 +2,9 @@ package main.java.algorithms.search.params;
 
 public class SearchParams 
 {
-	public double answer;
+	public int answer;
 	
-	public SearchParams(double answer)
+	public SearchParams(int answer)
 	{
 		this.answer = answer;
 	}

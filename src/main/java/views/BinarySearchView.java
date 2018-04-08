@@ -36,7 +36,8 @@ public class BinarySearchView implements IView
 	
 	public IAlgorithm<SearchResults, SearchParams> getAlgorithm(double answer)
 	{
-		return new BinarySearch(answer);
+		return null;
+		//return new BinarySearch(answer);
 	}
 
 	public String getAnswer() 
