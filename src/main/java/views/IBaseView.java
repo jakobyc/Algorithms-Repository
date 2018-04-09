@@ -1,4 +1,4 @@
-package main.java.views.forms;
+package main.java.views;
 
 import javax.swing.JPanel;
 

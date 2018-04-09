@@ -2,7 +2,7 @@ package main.java.views.forms;
 
 import java.awt.*;
 import javax.swing.*;
-import main.java.views.forms.IBaseView;
+import main.java.views.IBaseView;
 
 public class BaseForm implements IBaseView
 {

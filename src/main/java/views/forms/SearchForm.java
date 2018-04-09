@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import main.java.algorithms.search.results.SearchResults;
 import main.java.presenters.SearchPresenter;
+import main.java.views.IBaseView;
 
 public abstract class SearchForm
 {

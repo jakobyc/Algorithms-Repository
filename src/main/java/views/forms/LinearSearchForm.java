@@ -2,6 +2,8 @@ package main.java.views.forms;
 
 import javax.swing.JOptionPane;
 
+import main.java.views.*;
+
 public class LinearSearchForm extends SearchForm implements ISearchView
 {
 	public LinearSearchForm(IBaseView baseView) 

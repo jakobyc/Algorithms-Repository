@@ -1,6 +1,7 @@
 package main.java.views.forms;
 
 import javax.swing.JOptionPane;
+import main.java.views.*;
 
 public class BinarySearchForm extends SearchForm implements ISearchView
 {

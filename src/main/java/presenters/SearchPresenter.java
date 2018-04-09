@@ -5,20 +5,20 @@ import main.java.algorithms.search.*;
 import main.java.models.SearchModel;
 import main.java.views.ViewFactory;
 import main.java.views.ViewFactory.ViewType;
-import main.java.views.forms.*;
+import main.java.views.forms.BinarySearchForm;
+import main.java.views.forms.LinearSearchForm;
+import main.java.views.*;
 
 public class SearchPresenter 
 {
 	private ISearchView view;
 	private SearchModel model;
 	
-	private final String[] algorithms = new String[] { Constants.Algorithms.Search.Linear, Constants.Algorithms.Search.Binary };
-	
 	public SearchPresenter(ISearchView view)
 	{
-		attachView(view);
-		
 		this.model = new SearchModel();
+		
+		attachView(view);
 	}
 	
 	public void attachView(ISearchView newView)
@@ -27,7 +27,7 @@ public class SearchPresenter
 		{
 			view = newView;
 			view.initialize();
-			view.bindAlgorithms(algorithms);
+			view.bindAlgorithms(model.getAlgorithmOptions());
 			view.setPresenter(this);
 			view.addActionListeners();
 		}
