@@ -28,8 +28,43 @@ public class SearchPresenter
 			view = newView;
 			view.initialize();
 			view.bindAlgorithms(model.getAlgorithmOptions());
+			view.bindAlgorithmTypes(model.getAlgorithmTypes());
 			view.setPresenter(this);
 			view.addActionListeners();
+		}
+	}
+	
+	public void changeAlgorithmType(String algorithmType)
+	{
+		switch(algorithmType)
+		{
+			case(Constants.Algorithms.Sort.Type):
+				view.dispose();
+				PresenterFactory.createSortPresenter();
+				break;
+			case(Constants.Algorithms.Distance.Type):
+				break;
+		}
+	}
+	
+	public void changeView(String viewName)
+	{
+		switch(viewName)
+		{
+			case(Constants.Algorithms.Search.Linear):
+				if (view.getClass() != LinearSearchForm.class)
+				{
+					detachView();
+					attachView(ViewFactory.getSearchView(ViewType.LINEAR_SEARCH));
+				}
+				break;
+			case(Constants.Algorithms.Search.Binary):
+				if (view.getClass() != BinarySearchForm.class)
+				{
+					detachView();
+					attachView(ViewFactory.getSearchView(ViewType.BINARY_SEARCH));
+				}
+				break;
 		}
 	}
 	
@@ -64,26 +99,5 @@ public class SearchPresenter
 	public void executeBinary(int answer)
 	{
 		view.bindResults(model.getResults(new BinarySearch(), answer));
-	}
-	
-	public void changeView(String viewName)
-	{
-		switch(viewName)
-		{
-			case(Constants.Algorithms.Search.Linear):
-				if (view.getClass() != LinearSearchForm.class)
-				{
-					detachView();
-					attachView(ViewFactory.GetSearchView(ViewType.LINEAR_SEARCH));
-				}
-				break;
-			case(Constants.Algorithms.Search.Binary):
-				if (view.getClass() != BinarySearchForm.class)
-				{
-					detachView();
-					attachView(ViewFactory.GetSearchView(ViewType.BINARY_SEARCH));
-				}
-				break;
-		}
 	}
 }

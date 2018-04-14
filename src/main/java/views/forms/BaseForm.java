@@ -11,7 +11,7 @@ public class BaseForm implements IBaseView
 	private JMenu menu;
 	private JMenuItem menuItem;
 	private JPanel mainPanel;
-	public JPanel viewPanel;
+	private JPanel viewPanel;
 	private JLabel statusBar;
 	
 	public BaseForm(String title)
@@ -53,6 +53,12 @@ public class BaseForm implements IBaseView
 		// Null parameter = center screen:
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+	}
+	
+	public void repaint()
+	{
+		this.frame.validate();
+		this.frame.repaint();
 	}
 	
 	public void setStatus(String message)

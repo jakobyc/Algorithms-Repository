@@ -31,6 +31,7 @@ public abstract class SearchForm
 	protected JButton randomButton;
 	protected JButton setAnswerButton;
 	protected JComboBox<String> algorithmsList;
+	protected JComboBox<String> algorithmTypes;
 	
 	public SearchForm(IBaseView baseView)
 	{
@@ -38,10 +39,17 @@ public abstract class SearchForm
 		this.viewPanel = baseView.getViewPanel();
 	}
 	
-	protected void changeView(String view)
+	
+	protected void changeType()
 	{
-		presenter.changeView(view);
+		presenter.changeAlgorithmType(algorithmTypes.getSelectedItem().toString());
 	}
+	
+	protected void changeView()
+	{
+		presenter.changeView(algorithmsList.getSelectedItem().toString());
+	}
+	
 	
 	public void initialize()
 	{
@@ -81,25 +89,41 @@ public abstract class SearchForm
 		logPanel.add(logScroll);
 
 		// User buttons/lists:
+		algorithmTypes = new JComboBox<String>();
 		algorithmsList = new JComboBox<String>();
 		randomButton = new JButton("Random");
 		setAnswerButton = new JButton("Set Answer");
 
+		userPanel.add(algorithmTypes);
 		userPanel.add(algorithmsList);
 		userPanel.add(randomButton);
 		userPanel.add(setAnswerButton);
 		
 		// Paint:
-		viewPanel.validate();
-		viewPanel.repaint();
+		baseView.repaint();
 	}
 	
 	protected void bindAlgorithms(String[] algorithms)
 	{
-		algorithmsList.removeAllItems();
-		for (String algorithm : algorithms)
+		if (algorithms != null)
 		{
-			algorithmsList.addItem(algorithm);
+			algorithmsList.removeAllItems();
+			for (String algorithm : algorithms)
+			{
+				algorithmsList.addItem(algorithm);
+			}
+		}
+	}
+	
+	protected void bindAlgorithmTypes(String[] types)
+	{
+		if (algorithmTypes != null)
+		{
+			algorithmTypes.removeAllItems();
+			for (String algorithm : types)
+			{
+				algorithmTypes.addItem(algorithm);
+			}
 		}
 	}
 	

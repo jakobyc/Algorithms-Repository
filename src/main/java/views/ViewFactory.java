@@ -13,7 +13,7 @@ public class ViewFactory
 		baseView = new BaseForm("Algorithms Repository");
 	}
 	
-	public static ISearchView GetSearchView(ViewType type)
+	public static ISearchView getSearchView(ViewType type)
 	{
 		switch(type)
 		{
@@ -26,9 +26,23 @@ public class ViewFactory
 		}
 	}
 	
+	public static ISortView getSortView(ViewType type)
+	{
+		switch(type)
+		{
+			case SELECTION_SORT:
+				return new SelectionSortForm(baseView);
+			default:
+				return null;
+		}
+	}
+	
 	public enum ViewType
 	{
+		// Search:
 		LINEAR_SEARCH,
-		BINARY_SEARCH
+		BINARY_SEARCH,
+		// Sort:
+		SELECTION_SORT
 	}
 }

@@ -16,4 +16,13 @@ public class SearchModel
 	{
 		return new String[] { Constants.Algorithms.Search.Linear, Constants.Algorithms.Search.Binary };
 	}
+	
+	public String[] getAlgorithmTypes()
+	{
+		return new String[] { 
+								Constants.Algorithms.Search.Type, 
+								Constants.Algorithms.Sort.Type, 
+								Constants.Algorithms.Distance.Type 
+						  	};
+	}
 }

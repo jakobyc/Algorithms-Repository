@@ -15,7 +15,8 @@ public class LinearSearchForm extends SearchForm implements ISearchView
 	{
 		randomButton.addActionListener(e -> { executeRandom(); });
 		setAnswerButton.addActionListener(e -> { executeAnswer(); });
-		algorithmsList.addActionListener(e -> { changeView(algorithmsList.getSelectedItem().toString()); });
+		algorithmsList.addActionListener(e -> { changeView(); });
+		algorithmTypes.addActionListener(e -> changeType());
 	}
 	
 	public void bindAlgorithms(String[] algorithms)
@@ -23,6 +24,13 @@ public class LinearSearchForm extends SearchForm implements ISearchView
 		super.bindAlgorithms(algorithms);
 		
 		algorithmsList.setSelectedIndex(0);
+	}
+	
+	public void bindAlgorithmTypes(String[] types)
+	{
+		super.bindAlgorithmTypes(types);
+		
+		algorithmTypes.setSelectedIndex(0);
 	}
 	
 	private void executeRandom()
