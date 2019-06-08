@@ -1,7 +1,6 @@
 package main.java.presenters;
 
 import main.java.Constants;
-import main.java.algorithms.search.*;
 import main.java.models.SearchModel;
 import main.java.views.ViewFactory;
 import main.java.views.ViewFactory.ViewType;
@@ -9,7 +8,7 @@ import main.java.views.forms.BinarySearchForm;
 import main.java.views.forms.LinearSearchForm;
 import main.java.views.*;
 
-public class SearchPresenter 
+public class SearchPresenter
 {
 	private ISearchView view;
 	private SearchModel model;
@@ -47,7 +46,7 @@ public class SearchPresenter
 		}
 	}
 	
-	public void changeView(String viewName)
+	/*public void changeView(String viewName)
 	{
 		switch(viewName)
 		{
@@ -66,7 +65,7 @@ public class SearchPresenter
 				}
 				break;
 		}
-	}
+	}*/
 	
 	public void detachView()
 	{
@@ -77,27 +76,15 @@ public class SearchPresenter
 		}
 	}
 	
-	public void executeLinear()
+	public void execute(String algorithmName)
 	{
 		int answer = (int)Math.ceil(Math.random() * 100);
-		
-		executeLinear(answer);
+
+		execute(algorithmName, answer);
 	}
 	
-	public void executeLinear(int answer)
+	public void execute(String algorithmName, int answer)
 	{
-		view.bindResults(model.getResults(new LinearSearch(), answer));
-	}
-	
-	public void executeBinary()
-	{
-		int answer = (int)Math.ceil(Math.random() * 100);
-		
-		executeBinary(answer);
-	}
-	
-	public void executeBinary(int answer)
-	{
-		view.bindResults(model.getResults(new BinarySearch(), answer));
+		view.bindResults(model.getResults(model.getAlgorithm(algorithmName), answer));
 	}
 }

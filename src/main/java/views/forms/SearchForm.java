@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -12,49 +11,38 @@ import javax.swing.border.EmptyBorder;
 import main.java.algorithms.search.results.SearchResults;
 import main.java.presenters.SearchPresenter;
 import main.java.views.IBaseView;
+import main.java.views.ISearchView;
 
-public abstract class SearchForm
+public class SearchForm extends AlgorithmForm implements ISearchView
 {
-	protected IBaseView baseView;
 	protected SearchPresenter presenter;
 	
 	// Components:
-	protected JPanel viewPanel;
 	protected JPanel buttonsPanel;
 	protected JPanel operationPanel; 
-	protected JPanel logPanel;
 	protected JPanel userPanel;
 	protected JToggleButton[] rangeButtons;
-	protected JScrollPane logScroll;
-	protected JTextArea log;
-	// User buttons:
-	protected JButton randomButton;
-	protected JButton setAnswerButton;
-	protected JComboBox<String> algorithmsList;
-	protected JComboBox<String> algorithmTypes;
-	
+
 	public SearchForm(IBaseView baseView)
 	{
-		this.baseView = baseView;
-		this.viewPanel = baseView.getViewPanel();
+		super(baseView);
 	}
-	
 	
 	protected void changeType()
 	{
-		presenter.changeAlgorithmType(algorithmTypes.getSelectedItem().toString());
+		presenter.changeAlgorithmType(getAlgorithmType());
 	}
 	
-	protected void changeView()
+	/*protected void changeView()
 	{
-		presenter.changeView(algorithmsList.getSelectedItem().toString());
-	}
+		presenter.changeView(getAlgorithm());
+	}*/
 	
 	
 	public void initialize()
 	{
 		// Panels:
-		viewPanel.setLayout(new BorderLayout());
+		contentPanel.setLayout(new BorderLayout());
 		buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new GridLayout(4, 0));
 		operationPanel = new JPanel();
@@ -71,60 +59,11 @@ public abstract class SearchForm
 			
 			buttonsPanel.add(rangeButtons[i]);
 		}
-		viewPanel.add(buttonsPanel, BorderLayout.NORTH);
-		viewPanel.add(operationPanel, BorderLayout.CENTER);
-		
-		userPanel = new JPanel();
-		operationPanel.add(userPanel, BorderLayout.WEST);
-		logPanel = new JPanel();
-		operationPanel.add(logPanel, BorderLayout.EAST);
-
-		// Log:
-		log = new JTextArea(5, 25);
-		log.setEditable(false);
-		log.setText("Waiting for operation...");
-		log.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.GRAY), 
-														 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-		logScroll = new JScrollPane(log, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		logPanel.add(logScroll);
-
-		// User buttons/lists:
-		algorithmTypes = new JComboBox<String>();
-		algorithmsList = new JComboBox<String>();
-		randomButton = new JButton("Random");
-		setAnswerButton = new JButton("Set Answer");
-
-		userPanel.add(algorithmTypes);
-		userPanel.add(algorithmsList);
-		userPanel.add(randomButton);
-		userPanel.add(setAnswerButton);
-		
-		// Paint:
-		baseView.repaint();
-	}
+		contentPanel.add(buttonsPanel, BorderLayout.NORTH);
+		contentPanel.add(operationPanel, BorderLayout.CENTER);
 	
-	protected void bindAlgorithms(String[] algorithms)
-	{
-		if (algorithms != null)
-		{
-			algorithmsList.removeAllItems();
-			for (String algorithm : algorithms)
-			{
-				algorithmsList.addItem(algorithm);
-			}
-		}
-	}
-	
-	protected void bindAlgorithmTypes(String[] types)
-	{
-		if (algorithmTypes != null)
-		{
-			algorithmTypes.removeAllItems();
-			for (String algorithm : types)
-			{
-				algorithmTypes.addItem(algorithm);
-			}
-		}
+		// Repaint:
+		super.repaint();
 	}
 	
 	public void bindResults(SearchResults results)
@@ -148,28 +87,21 @@ public abstract class SearchForm
 		rangeButtons[results.getAnswer()].setBackground(Color.CYAN);
 		
 		// Log results:
-		log.setText("");
+		clearLog();
 		for (int attempt = 0; attempt < results.getGuessData().size(); attempt++)
 		{
 			int guess = results.getGuessData().get(attempt);
 			
-			if (log.getText().equals(""))
-			{
-				log.setText(String.format("Attempt %s: %s", (attempt + 1), guess));
-			}
-			else
-			{
-				log.append(String.format("\nAttempt %s: %s", (attempt + 1), guess));
-			}
+			log(String.format("\nAttempt %s: %s", (attempt + 1), guess));
 		}
-		log.append(String.format("\nAnswer, %s, found in %s attempts.", results.getAnswer(), results.getAttempts()));
+		log(String.format("\nAnswer, %s, found in %s attempts.", results.getAnswer(), results.getAttempts()));
 	}
 	
 	public void dispose()
 	{
-		viewPanel.removeAll();
+		//contentPanel.removeAll();
 		
-		for (ActionListener listener : randomButton.getActionListeners())
+		/*for (ActionListener listener : randomButton.getActionListeners())
 		{
 			randomButton.removeActionListener(listener);
 		}
@@ -182,16 +114,50 @@ public abstract class SearchForm
 		for (ActionListener listener : algorithmsList.getActionListeners())
 		{
 			algorithmsList.removeActionListener(listener);
-		}
-	}
-	
-	public void setStatus(String message)
-	{
-		baseView.setStatus(message);
+		}*/
 	}
 	
 	public void setPresenter(SearchPresenter presenter)
 	{
 		this.presenter = presenter;
+	}
+	
+	public void addActionListeners()
+	{
+		addRandomButtonListener(e -> { presenter.execute(getAlgorithm()); });
+		addAnswerButtonListener(e -> { executeAnswer(getAlgorithm());});
+		addAlgTypeListener(e -> changeType());
+	}
+	
+	private void executeAnswer(String algorithm)
+	{
+		String input = JOptionPane.showInputDialog(contentPanel, "Enter an answer for the algorithm to find.", "<Whole number between 0 and 100>", JOptionPane.INFORMATION_MESSAGE);
+		if (input != null && !input.isEmpty())
+		{
+			try
+			{
+				double answer = Double.parseDouble(input);
+				int parsedAnswer = (int)answer;
+			
+				if (answer >= 0 && answer <= 100)
+				{
+					setStatus("Executing binary search...");
+					presenter.execute(algorithm, parsedAnswer);
+					setStatus("Binary search executed.");
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(contentPanel, "Please input a number between 0 and 100.");
+				}
+			}
+			catch(Exception e)
+			{
+				JOptionPane.showMessageDialog(contentPanel, "Please input a number between 0 and 100.");
+			}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(contentPanel, "Please input a number between 0 and 100.");
+		}
 	}
 }

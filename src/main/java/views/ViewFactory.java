@@ -10,7 +10,7 @@ public class ViewFactory
 	
 	static
 	{
-		baseView = new BaseForm("Algorithms Repository");
+		baseView = new BaseForm();
 	}
 	
 	public static ISearchView getSearchView(ViewType type)

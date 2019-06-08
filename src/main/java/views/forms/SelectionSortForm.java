@@ -10,22 +10,19 @@ import main.java.presenters.SortPresenter;
 import main.java.views.IBaseView;
 import main.java.views.ISortView;
 
-public class SelectionSortForm implements ISortView
+public class SelectionSortForm extends AlgorithmForm implements ISortView
 {
-	private IBaseView baseView;
 	private SortPresenter presenter;
 	
-	private JPanel viewPanel;
 	private JPanel userPanel;
 	private JComboBox<String> algorithmsList;
 	private JComboBox<String> algorithmTypes;
 	
 	public SelectionSortForm(IBaseView baseView)
 	{
-		this.baseView = baseView;
-		this.viewPanel = baseView.getViewPanel();
+		super(baseView);
 	}
-	
+
 	public void bindAlgorithms(String[] algorithms) 
 	{
 		if (algorithms != null)
@@ -61,12 +58,12 @@ public class SelectionSortForm implements ISortView
 
 	public void dispose() 
 	{
-		viewPanel.removeAll();
+		contentPanel.removeAll();
 	}
 
 	public void initialize() 
 	{
-		viewPanel.setLayout(new BorderLayout());
+		contentPanel.setLayout(new BorderLayout());
 		userPanel = new JPanel();
 		
 		algorithmsList = new JComboBox<String>();
@@ -74,14 +71,9 @@ public class SelectionSortForm implements ISortView
 		
 		userPanel.add(algorithmTypes);
 		userPanel.add(algorithmsList);
-		viewPanel.add(userPanel, BorderLayout.NORTH);
+		contentPanel.add(userPanel, BorderLayout.NORTH);
 		
-		baseView.repaint();
-	}
-
-	public void setStatus(String message) 
-	{
-		baseView.setStatus(message);
+		repaint();
 	}
 
 	@Override

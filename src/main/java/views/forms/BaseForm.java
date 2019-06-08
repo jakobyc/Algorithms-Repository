@@ -14,15 +14,15 @@ public class BaseForm implements IBaseView
 	private JPanel viewPanel;
 	private JLabel statusBar;
 	
-	public BaseForm(String title)
+	public BaseForm()
 	{
-		initialize(title);
+		initialize();
 	}
 	
-	private void initialize(String title)
+	private void initialize()
 	{
 		// Frame:
-		frame = new JFrame(title);
+		frame = new JFrame("Algorithms Repository");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1500,  450);
 		
@@ -42,7 +42,8 @@ public class BaseForm implements IBaseView
 		
 		// View Panel:
 		viewPanel = new JPanel();
-		mainPanel.add(viewPanel, BorderLayout.CENTER);
+		viewPanel.setLayout(new BorderLayout());
+		mainPanel.add(viewPanel);
 		
 		// Status Bar:
 		statusBar = new JLabel(" Ready");
@@ -64,6 +65,11 @@ public class BaseForm implements IBaseView
 	public void setStatus(String message)
 	{
 		statusBar.setText(message);
+	}
+	
+	public void setTitle(String title)
+	{
+		this.frame.setTitle(title);
 	}
 	
 	public JPanel getViewPanel()
