@@ -151,6 +151,11 @@ public abstract class AlgorithmForm
 		}
 	}
 	
+	protected void dispose()
+	{
+		baseView.getViewPanel().removeAll();
+	}
+	
 	protected void repaint()
 	{
 		baseView.repaint();

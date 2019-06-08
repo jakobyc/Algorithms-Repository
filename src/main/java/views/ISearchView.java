@@ -3,9 +3,7 @@ package main.java.views;
 import main.java.algorithms.search.results.SearchResults;
 import main.java.presenters.SearchPresenter;
 
-public interface ISearchView extends IAlgorithmView
+public interface ISearchView extends IAlgorithmView<SearchResults, SearchPresenter>
 {
-	// Consider using generics and abstracting to IView/IAlgorithmView:
-	void bindResults(SearchResults results);
-	void setPresenter(SearchPresenter presenter);
+
 }

@@ -2,10 +2,6 @@ package main.java.presenters;
 
 import main.java.Constants;
 import main.java.models.SearchModel;
-import main.java.views.ViewFactory;
-import main.java.views.ViewFactory.ViewType;
-import main.java.views.forms.BinarySearchForm;
-import main.java.views.forms.LinearSearchForm;
 import main.java.views.*;
 
 public class SearchPresenter
@@ -45,27 +41,6 @@ public class SearchPresenter
 				break;
 		}
 	}
-	
-	/*public void changeView(String viewName)
-	{
-		switch(viewName)
-		{
-			case(Constants.Algorithms.Search.Linear):
-				if (view.getClass() != LinearSearchForm.class)
-				{
-					detachView();
-					attachView(ViewFactory.getSearchView(ViewType.LINEAR_SEARCH));
-				}
-				break;
-			case(Constants.Algorithms.Search.Binary):
-				if (view.getClass() != BinarySearchForm.class)
-				{
-					detachView();
-					attachView(ViewFactory.getSearchView(ViewType.BINARY_SEARCH));
-				}
-				break;
-		}
-	}*/
 	
 	public void detachView()
 	{

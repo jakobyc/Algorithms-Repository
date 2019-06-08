@@ -33,18 +33,12 @@ public class SearchForm extends AlgorithmForm implements ISearchView
 		presenter.changeAlgorithmType(getAlgorithmType());
 	}
 	
-	/*protected void changeView()
-	{
-		presenter.changeView(getAlgorithm());
-	}*/
-	
-	
 	public void initialize()
 	{
 		// Panels:
 		contentPanel.setLayout(new BorderLayout());
 		buttonsPanel = new JPanel();
-		buttonsPanel.setLayout(new GridLayout(4, 0));
+		buttonsPanel.setLayout(new GridLayout(7, 0));
 		operationPanel = new JPanel();
 		operationPanel.setLayout(new BorderLayout());
 		operationPanel.setBorder(new EmptyBorder(10, 25, 10, 25));
@@ -99,22 +93,7 @@ public class SearchForm extends AlgorithmForm implements ISearchView
 	
 	public void dispose()
 	{
-		//contentPanel.removeAll();
-		
-		/*for (ActionListener listener : randomButton.getActionListeners())
-		{
-			randomButton.removeActionListener(listener);
-		}
-		
-		for (ActionListener listener : setAnswerButton.getActionListeners())
-		{
-			setAnswerButton.removeActionListener(listener);
-		}
-		
-		for (ActionListener listener : algorithmsList.getActionListeners())
-		{
-			algorithmsList.removeActionListener(listener);
-		}*/
+		super.dispose();
 	}
 	
 	public void setPresenter(SearchPresenter presenter)
