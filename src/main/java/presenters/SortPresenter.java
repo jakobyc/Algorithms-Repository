@@ -3,7 +3,7 @@ package main.java.presenters;
 import main.java.models.SortModel;
 import main.java.views.ISortView;
 
-public class SortPresenter 
+public class SortPresenter extends AlgorithmPresenter
 {
 	private ISortView view;
 	private SortModel model;

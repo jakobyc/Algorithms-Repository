@@ -1,6 +1,8 @@
 package main.java.views;
 
-public interface IAlgorithmView<Results, Presenter> extends IView<Presenter>
+import main.java.presenters.AlgorithmPresenter;
+
+public interface IAlgorithmView<Results, Presenter extends AlgorithmPresenter<?, ?>> extends IView<Presenter>
 {
 	void bindAlgorithms(String[] algorithms);
 	void bindAlgorithmTypes(String[] types);

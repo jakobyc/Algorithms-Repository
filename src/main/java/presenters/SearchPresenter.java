@@ -1,54 +1,19 @@
 package main.java.presenters;
 
-import main.java.Constants;
+import main.java.algorithms.search.results.SearchResults;
 import main.java.models.SearchModel;
 import main.java.views.*;
 
-public class SearchPresenter
+public class SearchPresenter extends AlgorithmPresenter<SearchResults, SearchPresenter>
 {
-	private ISearchView view;
 	private SearchModel model;
 	
 	public SearchPresenter(ISearchView view)
 	{
 		this.model = new SearchModel();
 		
-		attachView(view);
-	}
-	
-	public void attachView(ISearchView newView)
-	{
-		if (newView != null)
-		{
-			view = newView;
-			view.initialize();
-			view.bindAlgorithms(model.getAlgorithmOptions());
-			view.bindAlgorithmTypes(model.getAlgorithmTypes());
-			view.setPresenter(this);
-			view.addActionListeners();
-		}
-	}
-	
-	public void changeAlgorithmType(String algorithmType)
-	{
-		switch(algorithmType)
-		{
-			case(Constants.Algorithms.Sort.Type):
-				view.dispose();
-				PresenterFactory.createSortPresenter();
-				break;
-			case(Constants.Algorithms.Distance.Type):
-				break;
-		}
-	}
-	
-	public void detachView()
-	{
-		if (view != null)
-		{
-			view.dispose();
-			view = null;
-		}
+		attachView(view, model.getAlgorithmOptions(), model.getAlgorithmTypes());
+		view.setPresenter(this);
 	}
 	
 	public void execute(String algorithmName)

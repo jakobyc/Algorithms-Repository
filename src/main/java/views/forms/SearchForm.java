@@ -2,11 +2,11 @@ package main.java.views.forms;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 import main.java.algorithms.search.results.SearchResults;
 import main.java.presenters.SearchPresenter;
@@ -20,17 +20,13 @@ public class SearchForm extends AlgorithmForm implements ISearchView
 	// Components:
 	protected JPanel buttonsPanel;
 	protected JPanel operationPanel; 
-	protected JPanel userPanel;
 	protected JToggleButton[] rangeButtons;
-
+	protected JButton randomButton;
+	protected JButton setAnswerButton;
+	
 	public SearchForm(IBaseView baseView)
 	{
 		super(baseView);
-	}
-	
-	protected void changeType()
-	{
-		presenter.changeAlgorithmType(getAlgorithmType());
 	}
 	
 	public void initialize()
@@ -39,9 +35,6 @@ public class SearchForm extends AlgorithmForm implements ISearchView
 		contentPanel.setLayout(new BorderLayout());
 		buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new GridLayout(7, 0));
-		operationPanel = new JPanel();
-		operationPanel.setLayout(new BorderLayout());
-		operationPanel.setBorder(new EmptyBorder(10, 25, 10, 25));
 		
 		// Range buttons:
 		rangeButtons = new JToggleButton[101];
@@ -54,8 +47,12 @@ public class SearchForm extends AlgorithmForm implements ISearchView
 			buttonsPanel.add(rangeButtons[i]);
 		}
 		contentPanel.add(buttonsPanel, BorderLayout.NORTH);
-		contentPanel.add(operationPanel, BorderLayout.CENTER);
 	
+		// Control Panel:
+		randomButton = new JButton("Random");
+		setAnswerButton = new JButton("Set Answer");
+		setControlPanel(new Component[] { randomButton, setAnswerButton });
+		
 		// Repaint:
 		super.repaint();
 	}
@@ -91,11 +88,6 @@ public class SearchForm extends AlgorithmForm implements ISearchView
 		log(String.format("\nAnswer, %s, found in %s attempts.", results.getAnswer(), results.getAttempts()));
 	}
 	
-	public void dispose()
-	{
-		super.dispose();
-	}
-	
 	public void setPresenter(SearchPresenter presenter)
 	{
 		this.presenter = presenter;
@@ -103,9 +95,9 @@ public class SearchForm extends AlgorithmForm implements ISearchView
 	
 	public void addActionListeners()
 	{
-		addRandomButtonListener(e -> { presenter.execute(getAlgorithm()); });
-		addAnswerButtonListener(e -> { executeAnswer(getAlgorithm());});
-		addAlgTypeListener(e -> changeType());
+		randomButton.addActionListener(e -> { presenter.execute(getAlgorithm()); });
+		setAnswerButton.addActionListener(e -> { executeAnswer(getAlgorithm());});
+		addAlgTypeListener(presenter);
 	}
 	
 	private void executeAnswer(String algorithm)

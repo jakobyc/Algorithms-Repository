@@ -2,21 +2,24 @@ package main.java.views.forms;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
 import main.java.Constants;
+import main.java.presenters.AlgorithmPresenter;
 import main.java.views.IBaseView;
 
-public abstract class AlgorithmForm
+public abstract class AlgorithmForm 
 {
 	private IBaseView baseView;
+	//private AlgorithmPresenter presenter;
 	
 	private JPanel controlPanel;
 	protected JPanel contentPanel;
-	private JPanel inputPanel;
+
 	
 	// Log components:
 	private JTextArea log;
@@ -25,8 +28,6 @@ public abstract class AlgorithmForm
 	// Input components:
 	private JComboBox<String> algorithmTypes;
 	private JComboBox<String> algorithmList;
-	private JButton randomButton;
-	private JButton setAnswerButton;
 	
 	public AlgorithmForm(IBaseView baseView)
 	{
@@ -40,32 +41,6 @@ public abstract class AlgorithmForm
 		// Control Panel:
 		controlPanel = new JPanel();
 		controlPanel.setLayout(new GridLayout(2, 1));
-		
-		// Input Panel:
-		inputPanel = new JPanel();
-		algorithmTypes = new JComboBox<String>();
-		algorithmTypes.addItem(Constants.Algorithms.Search.Type);
-		algorithmTypes.addItem(Constants.Algorithms.Sort.Type);
-		algorithmTypes.addItem(Constants.Algorithms.Distance.Type);
-		algorithmList = new JComboBox<String>();
-		algorithmList.addItem(Constants.Algorithms.Search.Linear);
-		algorithmList.addItem(Constants.Algorithms.Search.Binary);
-		randomButton = new JButton("Random");
-		setAnswerButton = new JButton("Set Answer");
-		inputPanel.add(algorithmTypes);
-		inputPanel.add(algorithmList);
-		inputPanel.add(randomButton);
-		inputPanel.add(setAnswerButton);
-		controlPanel.add(inputPanel);
-		
-		// Log:
-		log = new JTextArea(5, 25);
-		log.setEditable(false);
-		log.setText("Waiting for operation...");
-		log.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.GRAY), 
-														 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-		logScroll = new JScrollPane(log, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		controlPanel.add(logScroll);
 		
 		// Content Panel:
 		contentPanel = new JPanel();
@@ -107,24 +82,19 @@ public abstract class AlgorithmForm
 		}
 	}
 	
-	protected void addRandomButtonListener(ActionListener listener)
+	private void addActionListeners()
 	{
-		randomButton.addActionListener(listener);
+		//algorithmTypes.addActionListener(e -> changeType());
 	}
 	
-	protected void addAnswerButtonListener(ActionListener listener)
+	protected void addAlgTypeListener(AlgorithmPresenter<?, ?> presenter)
 	{
-		setAnswerButton.addActionListener(listener);
+		algorithmTypes.addActionListener((e) -> presenter.changeAlgorithmType(getAlgorithmType()));
 	}
 	
 	protected void addAlgListListener(ActionListener listener)
 	{
 		algorithmList.addActionListener(listener);
-	}
-	
-	protected void addAlgTypeListener(ActionListener listener)
-	{
-		algorithmTypes.addActionListener(listener);
 	}
 	
 	public void bindAlgorithms(String[] algorithms)
@@ -151,7 +121,7 @@ public abstract class AlgorithmForm
 		}
 	}
 	
-	protected void dispose()
+	public void dispose()
 	{
 		baseView.getViewPanel().removeAll();
 	}
@@ -159,6 +129,37 @@ public abstract class AlgorithmForm
 	protected void repaint()
 	{
 		baseView.repaint();
+	}
+	
+	protected void setControlPanel(Component[] components)
+	{
+		// Input Panel:
+		JPanel inputPanel = new JPanel();
+		algorithmTypes = new JComboBox<String>();
+		algorithmTypes.addItem(Constants.Algorithms.Search.Type);
+		algorithmTypes.addItem(Constants.Algorithms.Sort.Type);
+		algorithmTypes.addItem(Constants.Algorithms.Distance.Type);
+		algorithmList = new JComboBox<String>();
+		algorithmList.addItem(Constants.Algorithms.Search.Linear);
+		algorithmList.addItem(Constants.Algorithms.Search.Binary);
+		
+		inputPanel.add(algorithmTypes);
+		inputPanel.add(algorithmList);
+		for (Component component : components)
+		{
+			inputPanel.add(component);
+		}
+		
+		controlPanel.add(inputPanel);
+		
+		// Log:
+		log = new JTextArea(5, 25);
+		log.setEditable(false);
+		log.setText("Waiting for operation...");
+		log.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.GRAY), 
+														 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		logScroll = new JScrollPane(log, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		controlPanel.add(logScroll);
 	}
 	
 	public void setStatus(String message)
