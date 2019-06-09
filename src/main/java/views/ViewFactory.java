@@ -1,9 +1,7 @@
 package main.java.views;
 
-import main.java.views.*;
 import main.java.views.forms.*;
 
-@SuppressWarnings("unused")
 public class ViewFactory 
 {
 	private final static IBaseView baseView;
@@ -13,9 +11,11 @@ public class ViewFactory
 		baseView = new BaseForm();
 	}
 	
-	public static ISearchView getSearchView(ViewType type)
+	public static ISearchView getSearchView()
 	{
-		switch(type)
+		return new SearchForm(baseView);
+		
+		/*switch(type)
 		{
 			case LINEAR_SEARCH:
 				return new LinearSearchForm(baseView);
@@ -23,18 +23,19 @@ public class ViewFactory
 				return new BinarySearchForm(baseView);
 			default:
 				return null;
-		}
+		}*/
 	}
 	
-	public static ISortView getSortView(ViewType type)
+	public static ISortView getSortView()
 	{
-		switch(type)
+		return new SortForm(baseView);
+		/*switch(type)
 		{
 			case SELECTION_SORT:
 				return new SelectionSortForm(baseView);
 			default:
 				return null;
-		}
+		}*/
 	}
 	
 	public enum ViewType

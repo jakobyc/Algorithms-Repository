@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -82,19 +81,9 @@ public abstract class AlgorithmForm
 		}
 	}
 	
-	private void addActionListeners()
-	{
-		//algorithmTypes.addActionListener(e -> changeType());
-	}
-	
 	protected void addAlgTypeListener(AlgorithmPresenter<?, ?> presenter)
 	{
 		algorithmTypes.addActionListener((e) -> presenter.changeAlgorithmType(getAlgorithmType()));
-	}
-	
-	protected void addAlgListListener(ActionListener listener)
-	{
-		algorithmList.addActionListener(listener);
 	}
 	
 	public void bindAlgorithms(String[] algorithms)

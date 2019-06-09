@@ -91,13 +91,14 @@ public class SearchForm extends AlgorithmForm implements ISearchView
 	public void setPresenter(SearchPresenter presenter)
 	{
 		this.presenter = presenter;
+		
+		addAlgTypeListener(presenter);
 	}
 	
 	public void addActionListeners()
 	{
 		randomButton.addActionListener(e -> { presenter.execute(getAlgorithm()); });
 		setAnswerButton.addActionListener(e -> { executeAnswer(getAlgorithm());});
-		addAlgTypeListener(presenter);
 	}
 	
 	private void executeAnswer(String algorithm)
